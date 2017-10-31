@@ -2,7 +2,8 @@
   "generator-jhipster": {
     "promptValues": {
       "packageName": "za.co.ajk.incidentman",
-      "nativeLanguage": "en"
+      "nativeLanguage": "en",
+      "microservicePath": "../EventModule"
     },
     "jhipsterVersion": "4.10.1",
     "baseName": "SystemGateway",
