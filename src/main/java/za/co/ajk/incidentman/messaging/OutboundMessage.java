@@ -1,6 +1,8 @@
 package za.co.ajk.incidentman.messaging;
 
-public class OutboundMessage {
+import java.io.Serializable;
+
+public class OutboundMessage implements Serializable{
     
     private String eventType;
     private String sourceDestination;
