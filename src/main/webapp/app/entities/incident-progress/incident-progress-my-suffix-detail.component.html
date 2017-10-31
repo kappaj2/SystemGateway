@@ -1,0 +1,49 @@
+
+<div *ngIf="incidentProgress">
+    <h2><span jhiTranslate="systemGatewayApp.incidentProgress.detail.title">Incident Progress</span> {{incidentProgress.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="systemGatewayApp.incidentProgress.incidentNumber">Incident Number</span></dt>
+        <dd>
+            <span>{{incidentProgress.incidentNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incidentProgress.progressNumber">Progress Number</span></dt>
+        <dd>
+            <span>{{incidentProgress.progressNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incidentProgress.updatedBy">Updated By</span></dt>
+        <dd>
+            <span>{{incidentProgress.updatedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incidentProgress.dateUpdated">Date Updated</span></dt>
+        <dd>
+            <span>{{incidentProgress.dateUpdated | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incidentProgress.updatedPriority">Updated Priority</span></dt>
+        <dd>
+            <span jhiTranslate="{{'systemGatewayApp.Priority.' + incidentProgress.updatedPriority}}">{{incidentProgress.updatedPriority}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incidentProgress.progressDescription">Progress Description</span></dt>
+        <dd>
+            <span>{{incidentProgress.progressDescription}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incidentProgress.loanEquipment">Loan Equipment</span></dt>
+        <dd>
+            <span>{{incidentProgress.loanEquipment}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'incident-progress-my-suffix/'+ incidentProgress.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

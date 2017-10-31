@@ -1,0 +1,66 @@
+<div>
+    <h2>
+        <span jhiTranslate="systemGatewayApp.equipmentTracking.home.title">Equipment Trackings</span>
+        <button class="btn btn-primary float-right jh-create-entity create-equipment-tracking-my-suffix" [routerLink]="['/', { outlets: { popup: ['equipment-tracking-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="systemGatewayApp.equipmentTracking.home.createLabel">
+            Create new Equipment Tracking
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="equipmentTrackings">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="systemGatewayApp.equipmentTracking.equipmentId">Equipment Id</span></th>
+            <th><span jhiTranslate="systemGatewayApp.equipmentTracking.trackingId">Tracking Id</span></th>
+            <th><span jhiTranslate="systemGatewayApp.equipmentTracking.dateOnLoan">Date On Loan</span></th>
+            <th><span jhiTranslate="systemGatewayApp.equipmentTracking.bookedOutBy">Booked Out By</span></th>
+            <th><span jhiTranslate="systemGatewayApp.equipmentTracking.dateBookedBack">Date Booked Back</span></th>
+            <th><span jhiTranslate="systemGatewayApp.equipmentTracking.bookedInBy">Booked In By</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let equipmentTracking of equipmentTrackings ;trackBy: trackId">
+                <td><a [routerLink]="['../equipment-tracking-my-suffix', equipmentTracking.id ]">{{equipmentTracking.id}}</a></td>
+                <td>{{equipmentTracking.equipmentId}}</td>
+                <td>{{equipmentTracking.trackingId}}</td>
+                <td>{{equipmentTracking.dateOnLoan | date:'medium'}}</td>
+                <td>{{equipmentTracking.bookedOutBy}}</td>
+                <td>{{equipmentTracking.dateBookedBack | date:'medium'}}</td>
+                <td>{{equipmentTracking.bookedInBy}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../equipment-tracking-my-suffix', equipmentTracking.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'equipment-tracking-my-suffix/'+ equipmentTracking.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'equipment-tracking-my-suffix/'+ equipmentTracking.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

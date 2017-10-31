@@ -1,0 +1,128 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEquipmentLabel" jhiTranslate="systemGatewayApp.equipment.home.createOrEditLabel">Create or edit a Equipment</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!equipment.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="equipment.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.equipmentId" for="field_equipmentId">Equipment Id</label>
+            <input type="text" class="form-control" name="equipmentId" id="field_equipmentId"
+                [(ngModel)]="equipment.equipmentId" required />
+            <div [hidden]="!(editForm.controls.equipmentId?.dirty && editForm.controls.equipmentId?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.equipmentId?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.equipmentName" for="field_equipmentName">Equipment Name</label>
+            <input type="text" class="form-control" name="equipmentName" id="field_equipmentName"
+                [(ngModel)]="equipment.equipmentName" required />
+            <div [hidden]="!(editForm.controls.equipmentName?.dirty && editForm.controls.equipmentName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.equipmentName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.dateLoadedOnSystem" for="field_dateLoadedOnSystem">Date Loaded On System</label>
+            <div class="d-flex">
+                <input id="field_dateLoadedOnSystem" type="datetime-local" class="form-control" name="dateLoadedOnSystem" [(ngModel)]="equipment.dateLoadedOnSystem"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.dateLoadedOnSystem?.dirty && editForm.controls.dateLoadedOnSystem?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateLoadedOnSystem?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateLoadedOnSystem?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.uploadedBy" for="field_uploadedBy">Uploaded By</label>
+            <input type="text" class="form-control" name="uploadedBy" id="field_uploadedBy"
+                [(ngModel)]="equipment.uploadedBy" required />
+            <div [hidden]="!(editForm.controls.uploadedBy?.dirty && editForm.controls.uploadedBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.uploadedBy?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.currentStatus" for="field_currentStatus">Current Status</label>
+            <select class="form-control" name="currentStatus" [(ngModel)]="equipment.currentStatus" id="field_currentStatus"  required>
+                <option value="AVAILABLE">{{'systemGatewayApp.EquipmentStatus.AVAILABLE' | translate}}</option>
+                <option value="ON_LOAN">{{'systemGatewayApp.EquipmentStatus.ON_LOAN' | translate}}</option>
+                <option value="REMOVED">{{'systemGatewayApp.EquipmentStatus.REMOVED' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.currentStatus?.dirty && editForm.controls.currentStatus?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.currentStatus?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.dateCreated" for="field_dateCreated">Date Created</label>
+            <div class="d-flex">
+                <input id="field_dateCreated" type="datetime-local" class="form-control" name="dateCreated" [(ngModel)]="equipment.dateCreated"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.dateCreated?.dirty && editForm.controls.dateCreated?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateCreated?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateCreated?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.dateModified" for="field_dateModified">Date Modified</label>
+            <div class="d-flex">
+                <input id="field_dateModified" type="datetime-local" class="form-control" name="dateModified" [(ngModel)]="equipment.dateModified"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.dateModified?.dirty && editForm.controls.dateModified?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateModified?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateModified?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipment.updatedBy" for="field_updatedBy">Updated By</label>
+            <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                [(ngModel)]="equipment.updatedBy"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

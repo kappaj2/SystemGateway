@@ -1,0 +1,107 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myIncidentProgressLabel" jhiTranslate="systemGatewayApp.incidentProgress.home.createOrEditLabel">Create or edit a Incident Progress</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!incidentProgress.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="incidentProgress.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incidentProgress.incidentNumber" for="field_incidentNumber">Incident Number</label>
+            <input type="number" class="form-control" name="incidentNumber" id="field_incidentNumber"
+                [(ngModel)]="incidentProgress.incidentNumber" required />
+            <div [hidden]="!(editForm.controls.incidentNumber?.dirty && editForm.controls.incidentNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.incidentNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.incidentNumber?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incidentProgress.progressNumber" for="field_progressNumber">Progress Number</label>
+            <input type="number" class="form-control" name="progressNumber" id="field_progressNumber"
+                [(ngModel)]="incidentProgress.progressNumber" required />
+            <div [hidden]="!(editForm.controls.progressNumber?.dirty && editForm.controls.progressNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.progressNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.progressNumber?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incidentProgress.updatedBy" for="field_updatedBy">Updated By</label>
+            <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                [(ngModel)]="incidentProgress.updatedBy" required />
+            <div [hidden]="!(editForm.controls.updatedBy?.dirty && editForm.controls.updatedBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.updatedBy?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incidentProgress.dateUpdated" for="field_dateUpdated">Date Updated</label>
+            <div class="d-flex">
+                <input id="field_dateUpdated" type="datetime-local" class="form-control" name="dateUpdated" [(ngModel)]="incidentProgress.dateUpdated"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.dateUpdated?.dirty && editForm.controls.dateUpdated?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateUpdated?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateUpdated?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incidentProgress.updatedPriority" for="field_updatedPriority">Updated Priority</label>
+            <select class="form-control" name="updatedPriority" [(ngModel)]="incidentProgress.updatedPriority" id="field_updatedPriority" >
+                <option value="LOW">{{'systemGatewayApp.Priority.LOW' | translate}}</option>
+                <option value="MEDIUM">{{'systemGatewayApp.Priority.MEDIUM' | translate}}</option>
+                <option value="HIGH">{{'systemGatewayApp.Priority.HIGH' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incidentProgress.progressDescription" for="field_progressDescription">Progress Description</label>
+            <input type="text" class="form-control" name="progressDescription" id="field_progressDescription"
+                [(ngModel)]="incidentProgress.progressDescription" required />
+            <div [hidden]="!(editForm.controls.progressDescription?.dirty && editForm.controls.progressDescription?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.progressDescription?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incidentProgress.loanEquipment" for="field_loanEquipment">Loan Equipment</label>
+            <input type="text" class="form-control" name="loanEquipment" id="field_loanEquipment"
+                [(ngModel)]="incidentProgress.loanEquipment"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,32 @@
+{
+    "systemGatewayApp": {
+        "incident" : {
+            "home": {
+                "title": "Incidents",
+                "createLabel": "Create a new Incident",
+                "createOrEditLabel": "Create or edit a Incident"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Incident {{ id }}?"
+            },
+            "detail": {
+                "title": "Incident"
+            },
+            "companyKey": "Company Key",
+            "incidentNumber": "Incident Number",
+            "loggedBy": "Logged By",
+            "dateLogged": "Date Logged",
+            "priority": "Priority",
+            "incidentStatus": "Incident Status",
+            "incidentDescription": "Incident Description",
+            "screenCapture": "Screen Capture"
+        }
+    },
+    "eventModuleApp": {
+        "incident" : {
+            "created": "A new Incident is created with identifier {{ param }}",
+            "updated": "A Incident is updated with identifier {{ param }}",
+            "deleted": "A Incident is deleted with identifier {{ param }}"
+        }
+    }
+}

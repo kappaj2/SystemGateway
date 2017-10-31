@@ -1,0 +1,91 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEquipmentTrackingLabel" jhiTranslate="systemGatewayApp.equipmentTracking.home.createOrEditLabel">Create or edit a Equipment Tracking</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!equipmentTracking.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="equipmentTracking.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipmentTracking.equipmentId" for="field_equipmentId">Equipment Id</label>
+            <input type="text" class="form-control" name="equipmentId" id="field_equipmentId"
+                [(ngModel)]="equipmentTracking.equipmentId" required />
+            <div [hidden]="!(editForm.controls.equipmentId?.dirty && editForm.controls.equipmentId?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.equipmentId?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipmentTracking.trackingId" for="field_trackingId">Tracking Id</label>
+            <input type="number" class="form-control" name="trackingId" id="field_trackingId"
+                [(ngModel)]="equipmentTracking.trackingId" required />
+            <div [hidden]="!(editForm.controls.trackingId?.dirty && editForm.controls.trackingId?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.trackingId?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.trackingId?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipmentTracking.dateOnLoan" for="field_dateOnLoan">Date On Loan</label>
+            <div class="d-flex">
+                <input id="field_dateOnLoan" type="datetime-local" class="form-control" name="dateOnLoan" [(ngModel)]="equipmentTracking.dateOnLoan"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.dateOnLoan?.dirty && editForm.controls.dateOnLoan?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateOnLoan?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateOnLoan?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipmentTracking.bookedOutBy" for="field_bookedOutBy">Booked Out By</label>
+            <input type="text" class="form-control" name="bookedOutBy" id="field_bookedOutBy"
+                [(ngModel)]="equipmentTracking.bookedOutBy" required />
+            <div [hidden]="!(editForm.controls.bookedOutBy?.dirty && editForm.controls.bookedOutBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.bookedOutBy?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipmentTracking.dateBookedBack" for="field_dateBookedBack">Date Booked Back</label>
+            <div class="d-flex">
+                <input id="field_dateBookedBack" type="datetime-local" class="form-control" name="dateBookedBack" [(ngModel)]="equipmentTracking.dateBookedBack"
+                  />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.equipmentTracking.bookedInBy" for="field_bookedInBy">Booked In By</label>
+            <input type="text" class="form-control" name="bookedInBy" id="field_bookedInBy"
+                [(ngModel)]="equipmentTracking.bookedInBy"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

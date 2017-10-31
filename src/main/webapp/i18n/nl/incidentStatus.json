@@ -1,0 +1,11 @@
+{
+    "systemGatewayApp": {
+        "IncidentStatus" : {
+            "null": "",
+            "OPEN": "OPEN",
+            "PENDING_PARTS": "PENDING_PARTS",
+            "IN_PROGRESS": "IN_PROGRESS",
+            "CLOSED": "CLOSED"
+        }
+    }
+}

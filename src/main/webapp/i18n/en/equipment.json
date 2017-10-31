@@ -1,0 +1,32 @@
+{
+    "systemGatewayApp": {
+        "equipment" : {
+            "home": {
+                "title": "Equipment",
+                "createLabel": "Create a new Equipment",
+                "createOrEditLabel": "Create or edit a Equipment"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Equipment {{ id }}?"
+            },
+            "detail": {
+                "title": "Equipment"
+            },
+            "equipmentId": "Equipment Id",
+            "equipmentName": "Equipment Name",
+            "dateLoadedOnSystem": "Date Loaded On System",
+            "uploadedBy": "Uploaded By",
+            "currentStatus": "Current Status",
+            "dateCreated": "Date Created",
+            "dateModified": "Date Modified",
+            "updatedBy": "Updated By"
+        }
+    },
+    "eventModuleApp": {
+        "equipment" : {
+            "created": "A new Equipment is created with identifier {{ param }}",
+            "updated": "A Equipment is updated with identifier {{ param }}",
+            "deleted": "A Equipment is deleted with identifier {{ param }}"
+        }
+    }
+}

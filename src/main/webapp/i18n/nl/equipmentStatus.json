@@ -1,0 +1,10 @@
+{
+    "systemGatewayApp": {
+        "EquipmentStatus" : {
+            "null": "",
+            "AVAILABLE": "AVAILABLE",
+            "ON_LOAN": "ON_LOAN",
+            "REMOVED": "REMOVED"
+        }
+    }
+}

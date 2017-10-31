@@ -1,0 +1,56 @@
+
+<div *ngIf="incident">
+    <h2><span jhiTranslate="systemGatewayApp.incident.detail.title">Incident</span> {{incident.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="systemGatewayApp.incident.companyKey">Company Key</span></dt>
+        <dd>
+            <span>{{incident.companyKey}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incident.incidentNumber">Incident Number</span></dt>
+        <dd>
+            <span>{{incident.incidentNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incident.loggedBy">Logged By</span></dt>
+        <dd>
+            <span>{{incident.loggedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incident.dateLogged">Date Logged</span></dt>
+        <dd>
+            <span>{{incident.dateLogged | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incident.priority">Priority</span></dt>
+        <dd>
+            <span jhiTranslate="{{'systemGatewayApp.Priority.' + incident.priority}}">{{incident.priority}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incident.incidentStatus">Incident Status</span></dt>
+        <dd>
+            <span jhiTranslate="{{'systemGatewayApp.IncidentStatus.' + incident.incidentStatus}}">{{incident.incidentStatus}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incident.incidentDescription">Incident Description</span></dt>
+        <dd>
+            <span>{{incident.incidentDescription}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.incident.screenCapture">Screen Capture</span></dt>
+        <dd>
+            <div *ngIf="incident.screenCapture">
+                <a (click)="openFile(incident.screenCaptureContentType, incident.screenCapture)" jhiTranslate="entity.action.open">open</a>
+                {{incident.screenCaptureContentType}}, {{byteSize(incident.screenCapture)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'incident-my-suffix/'+ incident.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
