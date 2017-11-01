@@ -16,19 +16,17 @@ import za.co.ajk.incidentman.messaging.ProducerChannels;
 @EnableBinding(Source.class)
 public class MessageSenderImpl implements MessageSender {
 
-//    @Autowired
-//    @Qualifier(ProducerChannels.EVENT_DESTINATION)
+    @Autowired
+    @Qualifier(ProducerChannels.EVENT_DESTINATION)
     private MessageChannel eventDestinationChannel;
     
-//    @Autowired
-//    @Qualifier(ProducerChannels.BROADCASTS)
+    @Autowired
+    @Qualifier(ProducerChannels.BROADCASTS)
     private MessageChannel broadcastsChannel;
     
     @Autowired
-    MessageSenderImpl(ProducerChannels producerChannels){
-        this.eventDestinationChannel = producerChannels.eventDestinationChannel();
-        this.broadcastsChannel = producerChannels.broadcastsChannel();
-    }
+    @Qualifier(ProducerChannels.BILLING_DESTINATION)
+    private MessageChannel billingDestinationChannel;
     
     @Override
     public void sendMessage(Integer eventType){
@@ -39,6 +37,7 @@ public class MessageSenderImpl implements MessageSender {
         obm.setTargetDestination("EventModule");
         
         eventDestinationChannel.send(MessageBuilder.withPayload(obm).build());
+        billingDestinationChannel.send(MessageBuilder.withPayload(obm).build());
         
         OutboundMessage broadmes = new OutboundMessage();
         broadmes.setEventType("broadmes EventType : "+eventType);
