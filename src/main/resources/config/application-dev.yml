@@ -58,9 +58,9 @@ spring:
             discovery:
                 enabled: true
     rabbitmq:
-      username: imanager
-      host: localhost
-      password: imanager
+        username: imanager
+        host: localhost
+        password: imanager
 # ===================================================================
 # To enable SSL, generate a certificate using:
 # keytool -genkey -alias SystemGateway -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
@@ -112,7 +112,7 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: my-secret-token-to-change-in-production
+                secret: incidentmanager-develop-secret
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
@@ -150,6 +150,11 @@ jhipster:
 #
 # More documentation is available at:
 # http://www.jhipster.tech/common-application-properties/
+# NOTE: The validation for properties are enabled, so the property set here must exists in
+#       ApplicationProperties class. This is in the .config package.
 # ===================================================================
-
-application:
+#
+#application:
+#    restTemplateConfig:
+#        readTimeout: 350
+#        connectTimeout: 550
