@@ -1,0 +1,30 @@
+{
+    "systemGatewayApp": {
+        "equipmentTracking" : {
+            "home": {
+                "title": "Equipment Trackings",
+                "createLabel": "Create a new Equipment Tracking",
+                "createOrEditLabel": "Create or edit a Equipment Tracking"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Equipment Tracking {{ id }}?"
+            },
+            "detail": {
+                "title": "Equipment Tracking"
+            },
+            "equipmentId": "Equipment Id",
+            "trackingId": "Tracking Id",
+            "dateOnLoan": "Date On Loan",
+            "bookedOutBy": "Booked Out By",
+            "dateBookedBack": "Date Booked Back",
+            "bookedInBy": "Booked In By"
+        }
+    },
+    "eventModuleApp": {
+        "equipmentTracking" : {
+            "created": "A new Equipment Tracking is created with identifier {{ param }}",
+            "updated": "A Equipment Tracking is updated with identifier {{ param }}",
+            "deleted": "A Equipment Tracking is deleted with identifier {{ param }}"
+        }
+    }
+}

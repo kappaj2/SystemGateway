@@ -1,0 +1,137 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myIncidentLabel" jhiTranslate="systemGatewayApp.incident.home.createOrEditLabel">Create or edit a Incident</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!incident.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="incident.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.companyKey" for="field_companyKey">Company Key</label>
+            <input type="text" class="form-control" name="companyKey" id="field_companyKey"
+                [(ngModel)]="incident.companyKey" required />
+            <div [hidden]="!(editForm.controls.companyKey?.dirty && editForm.controls.companyKey?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.companyKey?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.incidentNumber" for="field_incidentNumber">Incident Number</label>
+            <input type="number" class="form-control" name="incidentNumber" id="field_incidentNumber"
+                [(ngModel)]="incident.incidentNumber" required />
+            <div [hidden]="!(editForm.controls.incidentNumber?.dirty && editForm.controls.incidentNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.incidentNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.incidentNumber?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.loggedBy" for="field_loggedBy">Logged By</label>
+            <input type="text" class="form-control" name="loggedBy" id="field_loggedBy"
+                [(ngModel)]="incident.loggedBy" required />
+            <div [hidden]="!(editForm.controls.loggedBy?.dirty && editForm.controls.loggedBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.loggedBy?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.dateLogged" for="field_dateLogged">Date Logged</label>
+            <div class="d-flex">
+                <input id="field_dateLogged" type="datetime-local" class="form-control" name="dateLogged" [(ngModel)]="incident.dateLogged"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.dateLogged?.dirty && editForm.controls.dateLogged?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateLogged?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateLogged?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.priority" for="field_priority">Priority</label>
+            <select class="form-control" name="priority" [(ngModel)]="incident.priority" id="field_priority"  required>
+                <option value="LOW">{{'systemGatewayApp.Priority.LOW' | translate}}</option>
+                <option value="MEDIUM">{{'systemGatewayApp.Priority.MEDIUM' | translate}}</option>
+                <option value="HIGH">{{'systemGatewayApp.Priority.HIGH' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.priority?.dirty && editForm.controls.priority?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.priority?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.incidentStatus" for="field_incidentStatus">Incident Status</label>
+            <select class="form-control" name="incidentStatus" [(ngModel)]="incident.incidentStatus" id="field_incidentStatus"  required>
+                <option value="OPEN">{{'systemGatewayApp.IncidentStatus.OPEN' | translate}}</option>
+                <option value="PENDING_PARTS">{{'systemGatewayApp.IncidentStatus.PENDING_PARTS' | translate}}</option>
+                <option value="IN_PROGRESS">{{'systemGatewayApp.IncidentStatus.IN_PROGRESS' | translate}}</option>
+                <option value="CLOSED">{{'systemGatewayApp.IncidentStatus.CLOSED' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.incidentStatus?.dirty && editForm.controls.incidentStatus?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.incidentStatus?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.incidentDescription" for="field_incidentDescription">Incident Description</label>
+            <input type="text" class="form-control" name="incidentDescription" id="field_incidentDescription"
+                [(ngModel)]="incident.incidentDescription" required />
+            <div [hidden]="!(editForm.controls.incidentDescription?.dirty && editForm.controls.incidentDescription?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.incidentDescription?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="systemGatewayApp.incident.screenCapture" for="field_screenCapture">Screen Capture</label>
+            <div>
+                <div *ngIf="incident.screenCapture" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(incident.screenCaptureContentType, incident.screenCapture)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{incident.screenCaptureContentType}}, {{byteSize(incident.screenCapture)}}</span>
+                    <button type="button" (click)="incident.screenCapture=null;incident.screenCaptureContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_screenCapture" (change)="setFileData($event, incident, 'screenCapture', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="screenCapture" id="field_screenCapture"
+                [(ngModel)]="incident.screenCapture"  />
+            <input type="hidden" class="form-control" name="screenCaptureContentType" id="field_screenCaptureContentType"
+                [(ngModel)]="incident.screenCaptureContentType" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.http.*;
@@ -27,7 +29,10 @@ public class GatewayResource {
     private final RouteLocator routeLocator;
 
     private final DiscoveryClient discoveryClient;
-
+    
+    //@Value("${message}")
+    private String message;
+    
     public GatewayResource(RouteLocator routeLocator, DiscoveryClient discoveryClient) {
         this.routeLocator = routeLocator;
         this.discoveryClient = discoveryClient;
@@ -51,5 +56,14 @@ public class GatewayResource {
             routeVMs.add(routeVM);
         });
         return new ResponseEntity<>(routeVMs, HttpStatus.OK);
+    }
+    
+    @GetMapping("/message")
+    @RefreshScope
+    public void refresh(){
+        log.info("Doing refresh!!!");
+        log.info("Message is : "+message);
+
+        
     }
 }

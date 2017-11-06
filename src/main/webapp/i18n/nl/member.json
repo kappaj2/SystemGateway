@@ -1,0 +1,30 @@
+{
+    "systemGatewayApp": {
+        "member" : {
+            "home": {
+                "title": "Members",
+                "createLabel": "Maak een nieuwe Member",
+                "createOrEditLabel": "Maak of wijzig een Member"
+            },
+            "delete": {
+                "question": "Bent u zeker dat u Member {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "Member"
+            },
+            "memberKey": "Member Key",
+            "memberName": "Member Name",
+            "memberSurname": "Member Surname",
+            "dateCreated": "Date Created",
+            "dateModified": "Date Modified",
+            "updatedBy": "Updated By"
+        }
+    },
+    "eventModuleApp": {
+        "member" : {
+            "created": "A new Member is created with identifier {{ param }}",
+            "updated": "A Member is updated with identifier {{ param }}",
+            "deleted": "A Member is deleted with identifier {{ param }}"
+        }
+    }
+}

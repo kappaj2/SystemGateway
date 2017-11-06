@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="systemGatewayApp.incidentProgress.home.title">Incident Progresses</span>
+        <button class="btn btn-primary float-right jh-create-entity create-incident-progress-my-suffix" [routerLink]="['/', { outlets: { popup: ['incident-progress-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="systemGatewayApp.incidentProgress.home.createLabel">
+            Create new Incident Progress
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="incidentProgresses">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="systemGatewayApp.incidentProgress.incidentNumber">Incident Number</span></th>
+            <th><span jhiTranslate="systemGatewayApp.incidentProgress.progressNumber">Progress Number</span></th>
+            <th><span jhiTranslate="systemGatewayApp.incidentProgress.updatedBy">Updated By</span></th>
+            <th><span jhiTranslate="systemGatewayApp.incidentProgress.dateUpdated">Date Updated</span></th>
+            <th><span jhiTranslate="systemGatewayApp.incidentProgress.updatedPriority">Updated Priority</span></th>
+            <th><span jhiTranslate="systemGatewayApp.incidentProgress.progressDescription">Progress Description</span></th>
+            <th><span jhiTranslate="systemGatewayApp.incidentProgress.loanEquipment">Loan Equipment</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let incidentProgress of incidentProgresses ;trackBy: trackId">
+                <td><a [routerLink]="['../incident-progress-my-suffix', incidentProgress.id ]">{{incidentProgress.id}}</a></td>
+                <td>{{incidentProgress.incidentNumber}}</td>
+                <td>{{incidentProgress.progressNumber}}</td>
+                <td>{{incidentProgress.updatedBy}}</td>
+                <td>{{incidentProgress.dateUpdated | date:'medium'}}</td>
+                <td jhiTranslate="{{'systemGatewayApp.Priority.' + incidentProgress.updatedPriority}}">{{incidentProgress.updatedPriority}}</td>
+                <td>{{incidentProgress.progressDescription}}</td>
+                <td>{{incidentProgress.loanEquipment}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../incident-progress-my-suffix', incidentProgress.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'incident-progress-my-suffix/'+ incidentProgress.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'incident-progress-my-suffix/'+ incidentProgress.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

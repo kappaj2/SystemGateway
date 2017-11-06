@@ -1,0 +1,45 @@
+
+<div *ngIf="equipmentTracking">
+    <h2><span jhiTranslate="systemGatewayApp.equipmentTracking.detail.title">Equipment Tracking</span> {{equipmentTracking.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="systemGatewayApp.equipmentTracking.equipmentId">Equipment Id</span></dt>
+        <dd>
+            <span>{{equipmentTracking.equipmentId}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.equipmentTracking.trackingId">Tracking Id</span></dt>
+        <dd>
+            <span>{{equipmentTracking.trackingId}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.equipmentTracking.dateOnLoan">Date On Loan</span></dt>
+        <dd>
+            <span>{{equipmentTracking.dateOnLoan | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.equipmentTracking.bookedOutBy">Booked Out By</span></dt>
+        <dd>
+            <span>{{equipmentTracking.bookedOutBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.equipmentTracking.dateBookedBack">Date Booked Back</span></dt>
+        <dd>
+            <span>{{equipmentTracking.dateBookedBack | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="systemGatewayApp.equipmentTracking.bookedInBy">Booked In By</span></dt>
+        <dd>
+            <span>{{equipmentTracking.bookedInBy}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'equipment-tracking-my-suffix/'+ equipmentTracking.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

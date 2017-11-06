@@ -1,0 +1,31 @@
+{
+    "systemGatewayApp": {
+        "incidentProgress" : {
+            "home": {
+                "title": "Incident Progresses",
+                "createLabel": "Maak een nieuwe Incident Progress",
+                "createOrEditLabel": "Maak of wijzig een Incident Progress"
+            },
+            "delete": {
+                "question": "Bent u zeker dat u Incident Progress {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "Incident Progress"
+            },
+            "incidentNumber": "Incident Number",
+            "progressNumber": "Progress Number",
+            "updatedBy": "Updated By",
+            "dateUpdated": "Date Updated",
+            "updatedPriority": "Updated Priority",
+            "progressDescription": "Progress Description",
+            "loanEquipment": "Loan Equipment"
+        }
+    },
+    "eventModuleApp": {
+        "incidentProgress" : {
+            "created": "A new Incident Progress is created with identifier {{ param }}",
+            "updated": "A Incident Progress is updated with identifier {{ param }}",
+            "deleted": "A Incident Progress is deleted with identifier {{ param }}"
+        }
+    }
+}

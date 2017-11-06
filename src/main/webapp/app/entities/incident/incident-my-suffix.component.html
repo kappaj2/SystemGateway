@@ -1,0 +1,73 @@
+<div>
+    <h2>
+        <span jhiTranslate="systemGatewayApp.incident.home.title">Incidents</span>
+        <button class="btn btn-primary float-right jh-create-entity create-incident-my-suffix" [routerLink]="['/', { outlets: { popup: ['incident-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="systemGatewayApp.incident.home.createLabel">
+            Create new Incident
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="incidents">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="companyKey"><span jhiTranslate="systemGatewayApp.incident.companyKey">Company Key</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="incidentNumber"><span jhiTranslate="systemGatewayApp.incident.incidentNumber">Incident Number</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="loggedBy"><span jhiTranslate="systemGatewayApp.incident.loggedBy">Logged By</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateLogged"><span jhiTranslate="systemGatewayApp.incident.dateLogged">Date Logged</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="priority"><span jhiTranslate="systemGatewayApp.incident.priority">Priority</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="incidentStatus"><span jhiTranslate="systemGatewayApp.incident.incidentStatus">Incident Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="incidentDescription"><span jhiTranslate="systemGatewayApp.incident.incidentDescription">Incident Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="screenCapture"><span jhiTranslate="systemGatewayApp.incident.screenCapture">Screen Capture</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let incident of incidents ;trackBy: trackId">
+                <td><a [routerLink]="['../incident-my-suffix', incident.id ]">{{incident.id}}</a></td>
+                <td>{{incident.companyKey}}</td>
+                <td>{{incident.incidentNumber}}</td>
+                <td>{{incident.loggedBy}}</td>
+                <td>{{incident.dateLogged | date:'medium'}}</td>
+                <td jhiTranslate="{{'systemGatewayApp.Priority.' + incident.priority}}">{{incident.priority}}</td>
+                <td jhiTranslate="{{'systemGatewayApp.IncidentStatus.' + incident.incidentStatus}}">{{incident.incidentStatus}}</td>
+                <td>{{incident.incidentDescription}}</td>
+                <td>
+                    <a *ngIf="incident.screenCapture" (click)="openFile(incident.screenCaptureContentType, incident.screenCapture)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="incident.screenCapture">{{incident.screenCaptureContentType}}, {{byteSize(incident.screenCapture)}}</span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../incident-my-suffix', incident.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'incident-my-suffix/'+ incident.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'incident-my-suffix/'+ incident.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

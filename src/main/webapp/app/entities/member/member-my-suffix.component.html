@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span jhiTranslate="systemGatewayApp.member.home.title">Members</span>
+        <button class="btn btn-primary float-right jh-create-entity create-member-my-suffix" [routerLink]="['/', { outlets: { popup: ['member-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="systemGatewayApp.member.home.createLabel">
+            Create new Member
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="members">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="memberKey"><span jhiTranslate="systemGatewayApp.member.memberKey">Member Key</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="memberName"><span jhiTranslate="systemGatewayApp.member.memberName">Member Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="memberSurname"><span jhiTranslate="systemGatewayApp.member.memberSurname">Member Surname</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateCreated"><span jhiTranslate="systemGatewayApp.member.dateCreated">Date Created</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateModified"><span jhiTranslate="systemGatewayApp.member.dateModified">Date Modified</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="updatedBy"><span jhiTranslate="systemGatewayApp.member.updatedBy">Updated By</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let member of members ;trackBy: trackId">
+                <td><a [routerLink]="['../member-my-suffix', member.id ]">{{member.id}}</a></td>
+                <td>{{member.memberKey}}</td>
+                <td>{{member.memberName}}</td>
+                <td>{{member.memberSurname}}</td>
+                <td>{{member.dateCreated | date:'medium'}}</td>
+                <td>{{member.dateModified | date:'medium'}}</td>
+                <td>{{member.updatedBy}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../member-my-suffix', member.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'member-my-suffix/'+ member.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'member-my-suffix/'+ member.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="members && members.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>
