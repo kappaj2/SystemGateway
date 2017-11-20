@@ -112,10 +112,29 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.cloud</groupId>-->
+                <!--<artifactId>spring-cloud-gcp-dependencies</artifactId>-->
+                <!--<version>1.0.0.M1</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-gcp-starter-pubsub</artifactId>-->
+            <!--<version>LATEST</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-integration-gcp</artifactId>-->
+            <!--<version>LATEST</version>-->
+        <!--</dependency>-->
+
+
         <dependency>
             <groupId>io.github.jhipster</groupId>
             <artifactId>jhipster</artifactId>
@@ -453,6 +472,9 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-data</artifactId>
         </dependency>
+
+
+        <!--            Testing         -->
         <!-- cucumber -->
         <dependency>
             <groupId>info.cukes</groupId>
@@ -468,6 +490,19 @@
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>repository.spring.snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>http://repo.spring.io/snapshot</url>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
         <testResources>
