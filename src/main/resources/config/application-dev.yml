@@ -154,7 +154,11 @@ jhipster:
 #       ApplicationProperties class. This is in the .config package.
 # ===================================================================
 #
-#application:
+application:
+    restTemplateConfig:
+        readTimeout: 350
+        connectTimeout: 550
+#
 #    restTemplateConfig:
 #        readTimeout: 350
 #        connectTimeout: 550

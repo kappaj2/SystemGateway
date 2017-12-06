@@ -1,3 +1,6 @@
+https://cloud.google.com/pubsub/docs/quickstart-client-libraries
+
+
 # SystemGateway
 This application was generated using JHipster 4.10.1, you can find documentation and help at [http://www.jhipster.tech/documentation-archive/v4.10.1](http://www.jhipster.tech/documentation-archive/v4.10.1).
 

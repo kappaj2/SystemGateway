@@ -1,5 +1,6 @@
 package za.co.ajk.incidentman.web.rest;
 
+import java.util.Date;
 import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import za.co.ajk.incidentman.messaging.MessageSender;
+import za.co.ajk.incidentman.messaging.googlepubsub.GoogleChannelManager;
 //import za.co.ajk.incidentman.messaging.googlepubsub.GoogleChannelManager;
 
 
@@ -21,9 +23,8 @@ public class TestSending {
     @Autowired
     private MessageSender messageSender;
     
-//    @Autowired
-//    private GoogleChannelManager.PubsubOutboundGateway messagingGateway;
-//
+    @Autowired
+    private GoogleChannelManager.PubsubOutboundGateway messagingGateway;
     
     @RequestMapping("/send/{nr}")
     public void submitMessage(@PathVariable("nr") Integer nr){
@@ -31,8 +32,9 @@ public class TestSending {
         IntStream.range(0, nr).forEach(ii -> messageSender.sendMessage(ii));
     }
     
-    @GetMapping("/testGoogle/submit/{ii}")
-    public void testSendingToGooglePubSub(final @PathVariable String ii){
-        //messagingGateway.sendToPubsub("Testing pub sub "+ii);
+    @GetMapping("/testGoogleSubmit/{message}/{cnt}")
+    public void testSendingToGooglePubSub(final @PathVariable  String message,  final @PathVariable Integer cnt){
+        IntStream.range(0, cnt).forEach(ii -> messagingGateway.sendToPubsub(message.concat(new Date()+""+ii)));
     }
+    
 }
