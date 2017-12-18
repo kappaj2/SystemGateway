@@ -40,4 +40,14 @@ public class OutboundMessage implements Serializable{
     public void setPayload(String payload) {
         this.payload = payload;
     }
+    
+    @Override
+    public String toString() {
+        return "OutboundMessage{" +
+            "eventType='" + eventType + '\'' +
+            ", sourceDestination='" + sourceDestination + '\'' +
+            ", targetDestination='" + targetDestination + '\'' +
+            ", payload='" + payload + '\'' +
+            '}';
+    }
 }

@@ -1,6 +1,5 @@
 package za.co.ajk.incidentman.web.rest;
 
-import java.util.Date;
 import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import za.co.ajk.incidentman.messaging.MessageSender;
+import za.co.ajk.incidentman.messaging.OutboundMessage;
 import za.co.ajk.incidentman.messaging.googlepubsub.GoogleChannelManager;
 //import za.co.ajk.incidentman.messaging.googlepubsub.GoogleChannelManager;
 
@@ -33,8 +34,18 @@ public class TestSending {
     }
     
     @GetMapping("/testGoogleSubmit/{message}/{cnt}")
-    public void testSendingToGooglePubSub(final @PathVariable  String message,  final @PathVariable Integer cnt){
-        IntStream.range(0, cnt).forEach(ii -> messagingGateway.sendToPubsub(message.concat(new Date()+""+ii)));
+    public void testSendingToGooglePubSub(final @PathVariable  String message,  final @PathVariable Integer cnt) throws Exception{
+       // IntStream.range(0, cnt).forEach(ii -> messagingGateway.sendToPubsub(message.concat(new Date()+""+ii)));
+    
+        OutboundMessage om = new OutboundMessage();
+        om.setEventType("EventType1");
+        om.setSourceDestination("Source dest");
+        om.setTargetDestination("Target dest");
+        om.setPayload(message);
+    
+        ObjectMapper mapper = new ObjectMapper();
+        String payload = mapper.writeValueAsString(om);
+        messagingGateway.sendToPubsub(payload);
     }
     
 }
