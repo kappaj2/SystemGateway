@@ -27,12 +27,22 @@ public class TestSending {
     @Autowired
     private GoogleChannelManager.PubsubOutboundGateway messagingGateway;
     
+    /**
+     * This will test sending via the RabbitMQ channels
+     * @param nr
+     */
     @RequestMapping("/send/{nr}")
     public void submitMessage(@PathVariable("nr") Integer nr){
         log.info("Sending "+nr+"  message(s)!!");
         IntStream.range(0, nr).forEach(ii -> messageSender.sendMessage(ii));
     }
     
+    /**
+     * This will test sending on the GooglePubSub channel.
+     * @param message
+     * @param cnt
+     * @throws Exception
+     */
     @GetMapping("/testGoogleSubmit/{message}/{cnt}")
     public void testSendingToGooglePubSub(final @PathVariable  String message,  final @PathVariable Integer cnt) throws Exception{
        // IntStream.range(0, cnt).forEach(ii -> messagingGateway.sendToPubsub(message.concat(new Date()+""+ii)));

@@ -9,12 +9,15 @@ import org.springframework.cloud.gcp.pubsub.core.PubSubOperations;
 import org.springframework.cloud.gcp.pubsub.support.GcpHeaders;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.gcp.pubsub.AckMode;
 import org.springframework.integration.gcp.pubsub.inbound.PubSubInboundChannelAdapter;
 import org.springframework.integration.gcp.pubsub.outbound.PubSubMessageHandler;
+import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.stereotype.Component;
@@ -24,6 +27,11 @@ import com.google.cloud.pubsub.v1.AckReplyConsumer;
 import za.co.ajk.incidentman.messaging.OutboundMessage;
 
 
+/**
+ * Integration with Google PubSub channels and subscriptions.
+ * Refer the following documents for related information:
+ * https://docs.spring.io/spring-integration/reference/htmlsingle/#_gateway_changes
+ */
 @Component
 @Configuration
 public class GoogleChannelManager {
@@ -38,8 +46,6 @@ public class GoogleChannelManager {
             new PubSubInboundChannelAdapter(pubSubTemplate, "testSubscription");
         adapter.setOutputChannel(inputChannel);
         adapter.setAckMode(AckMode.MANUAL);
-        
-        //adapter.setMessageConverter(new MappingJackson2MessageConverter());
         
         return adapter;
     }
@@ -88,6 +94,22 @@ public class GoogleChannelManager {
     public interface PubsubOutboundGateway {
         
         void sendToPubsub(String text);
+    }
+    
+    @Bean
+    @ServiceActivator(inputChannel = "logChannel")
+    public LoggingHandler logging() {
+        LoggingHandler adapter = new LoggingHandler(LoggingHandler.Level.DEBUG);
+        adapter.setLoggerName("TEST_LOGGER");
+        adapter.setLogExpressionString("headers.id + ': ' + payload");
+        return adapter;
+    }
+    
+    @MessagingGateway(defaultRequestChannel = "logChannel")
+    public interface MyGateway {
+        
+        void sendToLogger(String data);
+        
     }
     
 }
